@@ -1,0 +1,101 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css2/bootstrap.min.css' %}" rel="stylesheet" />
+
+    
+    <!-- Style -->
+    <link href="{% static 'css2/style.css' %}" rel="stylesheet" />
+
+    <title>Contact Form #8</title>
+  </head>
+  <body>
+  
+
+  <div class="content">
+    
+    <div class="container">
+      <div class="row align-items-stretch no-gutters contact-wrap">
+        <div class="col-md-6">
+          <div class="form h-100">
+            <h3>주가 예측 시스템</h3>
+            <form class="mb-5" method="post" id="predForm" name="predForm" action = './pred_res'>
+              <div class="row">
+                <div class="col-md-6 form-group mb-5">
+                  <label for="item" class="col-form-label">종목</label>
+                  <input type="text" class="form-control" name="item" id="item" placeholder="종목">
+                </div>
+                </div>
+              <div class="row">
+                <div class="col-md-6 form-group mb-5">
+                  <label for="start" class="col-form-label">전일종가</label>
+                  <input type="text" class="form-control" name="start" id="start" placeholder="전일종가">
+                </div>
+
+                <div class="col-md-6 form-group mb-5">
+                  <label for="upper" class="col-form-label">상한가</label>
+                  <input type="text" class="form-control" name="upper" id="upper"  placeholder="상한가">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group mb-5">
+                  <label for="lower" class="col-form-label">하한가</label>
+                  <input type="text" class="form-control" name="lower" id="lower"  placeholder="하한가">
+                </div>
+                <div class="col-md-6 form-group mb-5">
+                  <label for="volume" class="col-form-label">거래량</label>
+                  <input type="text" class="form-control" name="volume" id="volume" placeholder="거래량">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <input type="submit" value="전송" class="btn btn-primary rounded-0 py-2 px-4">
+                  <span class="submitting"></span>
+                </div>
+              </div>
+            </form>
+
+            <div id="form-message-warning mt-4"></div> 
+            <div id="form-message-success">
+              데이터가 전송되었습니다
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="contact-info h-100" style="background-image: url('images/map.jpg')">
+              <div class="row">
+                <div class="col-md-6 form-group mb-5">
+                  <label for="item_pre" class="col-form-label">종목 예측가</label>
+                  <input type="text" class="form-control" name="item_pre" id="item_pre" placeholder="종목" readonly>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    
+    
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+  </body>
+</html>

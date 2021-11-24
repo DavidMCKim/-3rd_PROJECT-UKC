@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+{% load my_tag %}
+{% load count %}
+<head>
+  <title>UKC &mdash; U KNOW CAMPING</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Work+Sans:400,700,900&display=swap'>
+  <link rel="stylesheet" href="{%static 'fonts/icomoon/style.css' %}">
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{%static 'css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{%static 'css/jquery.fancybox.min.css' %}">
+  <link rel="stylesheet" href="{%static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{%static 'css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{%static 'fonts/flaticon/font/flaticon.css' %}">
+  <link rel="stylesheet" href="{%static 'css/aos.css' %}">
+  <link rel="stylesheet" href="{%static 'css/style.css' %}">
+
+  <style>
+   .menu {
+        display: flex;
+        border: 1px solid yellow;
+    }
+
+    .menu-link {
+        margin: .1em;
+        padding: .3em;
+        color: #fff;
+        text-decoration: none;
+        background: dodgerblue;
+        list-style: none;
+    }
+
+    .menu-active {
+        background: orange;
+    }
+
+    .menu {
+        background-color: yellowgreen;
+    }
+
+   .max-small {
+      width:400px;
+      height:250px;
+      margin-top:100px;
+      margin-left:150px;
+      }
+
+   .result_info h2{
+    margin-top:15%;
+    }
+
+   .result_info {
+    padding-bottom:40px;
+    }
+
+    li { list-style:none; }
+
+    .container {
+    padding-bottom:15px;
+    }
+
+
+    .camp-list {
+    width: 33%;
+    display: inline-block;
+    text-align:center;
+    }
+
+    .camp_result{
+    margin-top:20px;
+    margin-bottom : 80px;
+    width:330%;
+    word-wrap: break-word;;
+    }
+    .result_info{
+    margin-top:45px;}
+
+  </style>
+
+
+  <script src="{%static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{%static 'js/jquery-migrate-3.0.0.js' %}"></script>
+  <script src="{%static 'js/popper.min.js' %}"></script>
+  <script src="{%static 'js/bootstrap.min.js' %}"></script>
+  <script src="{%static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{%static 'js/jquery.sticky.js' %}"></script>
+  <script src="{%static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{%static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{%static 'js/jquery.fancybox.min.js' %}"></script>
+  <script src="{%static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{%static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{%static 'js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{%static 'js/isotope.pkgd.min.js' %}"></script>
+  <script src="{%static 'js/aos.js' %}"></script>
+  <script src="{%static 'js/main.js' %}"></script>
+  <script src="{%static 'js/sojin.js' %}"></script>
+</head>
+<body>
+
+  <div class="site-wrap" id="home-section">
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+  </div>
+
+  <header class="site-navbar site-navbar-target" role="banner">
+    <div class="container">
+      <div class="row align-items-center position-relative">
+        <div class="col-3 ">
+          <div class="site-logo">
+            <a href="home" class="font-weight-bold">
+              <img src="{%static 'images/camping_logo.jpg' %}" alt="Image" class="img-fluid">
+            </a>
+          </div>
+        </div>
+
+        <div class="col-9  text-right">
+          <span class="d-inline-block d-lg-none"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span class="icon-menu h3 text-white"></span></a></span>
+          <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
+            <ul class="site-menu main-menu js-clone-nav ml-auto ">
+              <li class="active" style="font-family : kotra;" ><a href="{% url 'home:home' %}" class="nav-link">Home</a></li>
+              <li style="font-family : kotra;" ><a href="{% url 'home:site' %}" class="nav-link">Site</a></li>
+              <li style="font-family : kotra;" ><a href="{% url 'home:review' %}" class="nav-link">Review</a></li>
+              {% if user.is_authenticated %}
+              <li style="font-family : kotra;" > <a href="{% url 'home:logout' %}" class="nav-link"> {{user.username}} (로그아웃) </a></li>
+              {% else %}
+              <li style="font-family : kotra;" ><a href="{% url 'home:login' %}" class="nav-link"> LogIn </a></li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="ftco-blocks-cover-1">
+    <div class="site-section-cover overlay" style="background-image: url({%static 'images/camping_main.jpg' %});">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-5">
+            <h1 class="mb-3 text-white" style="font-family : kotra;">U KNOW CAMPING</h1>
+            <p style="font-family : ugroL;">리뷰야 나의 마음을 알려조</p>
+            <p class="d-flex align-items-center">
+             <!-- <a href="https://vimeo.com/191947042" data-fancybox class="play-btn-39282 mr-3"><span class="icon-play"></span></a>
+	      <span class="small">Watch the video</span> -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if user.is_authenticated %}
+    {% if check == 'exist' %}
+    <!--리뷰검색결과 출력화면-->
+    <div class="row justify-content-center text-center">
+      <div class="col-md-7">
+        <div class="heading-39101 mb-5">
+          <br>
+          <h1 style="font-family : ugroM; font-size:38px;">{{user.username}}님만을 위한 믿고 가는 캠핑장!</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+
+        <div class="container">
+          <!--1번째-->
+          <div class="site-section">
+            <div class="container">
+               <div class="row" >
+                 {% for i in best %}
+                 <article class="camp-list column1">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                      <div class="camp_result" id="first">
+                         <img src="{%static i.image %}" alt="Image" class="img-fluid" style="width:300px; height:200px;">
+                           <div class="result_info" style="font-family : ugroB;" >
+                             <h3 style="font-family : ugroB;"><a href="{{i.url}}" style="color:black;">{{i.name}}</a></h3><br>
+                                  <p class="result_addr"><img src="{%static 'images/address.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.address}}</p>
+                                  <p class="result_phone"><img src="{%static 'images/phone.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.phone}}</p>
+                                  <p class="result_info"><img src="{%static 'images/info.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.info}}</p>
+                           </div>
+                      </div>
+                    </div>
+                 </article>
+                 {% if forloop.counter|modulo:3 == 0 %}
+               </div>
+
+                <div class="row">
+                {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+          </div>
+          <!--2번째-->
+          <div class="row justify-content-center text-center">
+            <div class="col-md-7">
+              <div class="heading-39101 mb-5">
+                <br>
+                <h1 style="font-family : ugroM; font-size:38px;">{{user.username}}님이 방문했던 <br>캠핑장과 비슷한곳을 추천할게요!</h1>
+              <!-- <h1 style="font-family : kotra;">  좋아하는 캠핑장 BEST 3!!</h1> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="site-section">
+            <div class="container">
+               <div class="row" >
+                 {% for i in only_by_contents %}
+                 <article class="camp-list column1">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                      <div class="camp_result">
+                         <img src="{%static i.image %}" alt="Image" class="img-fluid" style="width:300px; height:200px;">
+                           <div class="result_info" style="font-family : ugroB;" >
+                             <h3 style="font-family : ugroB;"><a href="{{i.url}}" style="color:black;">{{i.name}}</a></h3><br>
+                             <p class="result_addr"><img src="{%static 'images/address.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.address}}</p>
+                             <p class="result_phone"><img src="{%static 'images/phone.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.phone}}</p>
+                             <p class="result_info"><img src="{%static 'images/info.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.info}}</p>
+                           </div>
+                      </div>
+                    </div>
+                 </article>
+               {% if forloop.counter|modulo:3 == 0 %}
+               </div>
+
+               <div class="row">
+               {% endif %}
+               {% endfor %}
+               </div>
+            </div>
+          </div>
+
+        <!--3번째-->
+        <div class="row justify-content-center text-center">
+          <div class="col-md-7">
+            <div class="heading-39101 mb-5">
+              <br>
+              <h1 style="font-family : ugroM; font-size:38px;">{{user.username}}님과 비슷한 성향의 고객들은<br>이 캠핑장도 다녀왔어요!</h1>
+             <!-- <h1 style="font-family : kotra;"> 비슷한 캠핑장 BEST 3!! </h1> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="site-section">
+        <div class="container">
+           <div class="row" >
+           {% for i in only_by_items %}
+           <article class="camp-list column1">
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="camp_result">
+                   <img src="{%static i.image %}" alt="Image" class="img-fluid" style="width:300px; height:200px;">
+                           <div class="result_info" style="font-family : ugroB;" >
+                             <h3 style="font-family : ugroB;"><a href="{{i.url}}" style="color:black;">{{i.name}}</a></h3><br>
+                             <p class="result_addr"><img src="{%static 'images/address.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.address}}</p>
+                             <p class="result_phone"><img src="{%static 'images/phone.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.phone}}</p>
+                             <p class="result_info"><img src="{%static 'images/info.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.info}}</p>
+                           </div>
+                </div>
+              </div>
+           </article>
+          {% if forloop.counter|modulo:3 == 0 %}
+          </div>
+          <div class="row">
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% elif check == 'none' %}
+    <div class="site-section py-5">
+      <div class="container">
+        <div class="row align-items-center">
+        <!--태그로 여행지 찾아주기-->
+          <div class="section_04" style="font-family : ugroL;">
+            <div class="layout" >
+              <h2 class="tt01" style="font-family : ugroB;"> 태그로 찾는 나만의 캠핑장 </h2>
+              <br>
+              <form id="buttons_tag2" method="get" action="{% url 'home:find_tag' %}">
+                <table id="button_table2" class="table table-hover" style="padding:10px 50px 10px 50px; font-size:18px;" >
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="가을" id="fall">#가을
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="가족" id="family">#가족
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="감상" id="enjoy">#감상
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="감성" id="emotion">#감성
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="겨울" id="winter">#겨울
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="경치" id="view">#경치
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="계곡" id="valley">#계곡
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="고요" id="calm">#고요
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="공기" id="air">#공기
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="공원" id="park"">#공원
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="관광" id="traveling" >#관광
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="깨끗" id="clean">#깨끗
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="감성=나무" id="tree" >#나무
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="낚시" id="fishing">#낚시
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="낭만" id="romance">#낭만
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="단풍" id="maple">#단풍
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="물멍" id="water">#물멍
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="바다" id="sea">#바다
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="반딧불" id="firefly">#반딧불
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="반려동물" id="pet">#반려동물
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="벚꽃" id="sakura">#벚꽃
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="분위기" id="atmosphere">#분위기
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="불멍" id="fire">#불멍
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="산책" id="walking">#산책
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="솔로캠핑" id="camping_alone">#솔로캠핑
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="시골" id="countryside">#시골
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="아이" id="kid">#아이
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="야경" id="night_view">#야경
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="여름" id="summer">#여름
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="우중" id="rain">#우중
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="운치" id="vibe" >#운치
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="일몰" id="sunset">#일몰
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="장박" id="long_stay">#장박
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="저수지" id="reservoir">#저수지
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="접근성" id="accessibility">#접근성
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="친구" id="friend">#친구
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="친절" id="kindness">#친절
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="커플" id="couple">#커플
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="쾌적" id="fresh">#쾌적
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="편안" id="comfort">#편안
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="한강" id="han_river">#한강
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="호수" id="lake">#호수
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="휴식" id="break">#휴식
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="힐링" id="healing">#힐링
+                    </td>
+                  </tr>
+                </table>
+
+                <div class="tag_btn_wrap" style="text-align:center" >
+                  <input type="reset">
+                  <input type="submit" onclick="location.href='find_tag'" value="검색하기">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-right">
+        </div>
+        <div class="row justify-content-center text-center">
+          <div class="col-md-7">
+            <div class="heading-39101 mb-5">
+              <br>
+              <p style="font-family : ugroB; margin-left:-50px; font-size:23px;">리뷰를 작성하시면 {{user.username}}님께 어울리는 캠핑장을 추천드려요!</p>
+              <input type="button" style="font-family : ugroM; margin-left:-70px; font-size:15px;" onclick="location.href='review'" value="리뷰쓰러가기">
+              <br>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+    {% else %}
+    <div class="site-section py-5">
+      <div class="container">
+        <div class="row align-items-center">
+        <!--태그로 여행지 찾아주기-->
+          <div class="section_04" style="font-family : ugroL;">
+            <div class="layout" >
+              <h2 class="tt01" style="font-family : ugroB;"> 태그로 찾는 나만의 캠핑장 </h2>
+              <br>
+              <form id="buttons_tag" method="get" action="{% url 'home:find_tag' %}">
+                <table id="button_table" class="table table-hover" style="padding:10px 50px 10px 50px; font-size:18px;" >
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="가을" id="fall">#가을
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="가족" id="family">#가족
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="감상" id="enjoy">#감상
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="감성" id="emotion">#감성
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="겨울" id="winter">#겨울
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="경치" id="view">#경치
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="계곡" id="valley">#계곡
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="고요" id="calm">#고요
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="공기" id="air">#공기
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="공원" id="park"">#공원
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="관광" id="traveling" >#관광
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="깨끗" id="clean">#깨끗
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="감성=나무" id="tree" >#나무
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="낚시" id="fishing">#낚시
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="낭만" id="romance">#낭만
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="단풍" id="maple">#단풍
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="물멍" id="water">#물멍
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="바다" id="sea">#바다
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="반딧불" id="firefly">#반딧불
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="반려동물" id="pet">#반려동물
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="벚꽃" id="sakura">#벚꽃
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="분위기" id="atmosphere">#분위기
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="불멍" id="fire">#불멍
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="산책" id="walking">#산책
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="솔로캠핑" id="camping_alone">#솔로캠핑
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="시골" id="countryside">#시골
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="아이" id="kid">#아이
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="야경" id="night_view">#야경
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="여름" id="summer">#여름
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="우중" id="rain">#우중
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="운치" id="vibe" >#운치
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="일몰" id="sunset">#일몰
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="장박" id="long_stay">#장박
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="저수지" id="reservoir">#저수지
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="접근성" id="accessibility">#접근성
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="친구" id="friend">#친구
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="친절" id="kindness">#친절
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="커플" id="couple">#커플
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="쾌적" id="fresh">#쾌적
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="편안" id="comfort">#편안
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="한강" id="han_river">#한강
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="호수" id="lake">#호수
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="휴식" id="break">#휴식
+                    </td>
+                    <td>
+                      <input type="checkbox" name="m_tab" class="tag_btn" value="힐링" id="healing">#힐링
+                    </td>
+                  </tr>
+                </table>
+
+                <div class="tag_btn_wrap" style="text-align:center" >
+                  <input type="reset">
+                  <input type="submit" onclick="location.href='find_tag'" value="검색하기">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <div class="col-md-6" data-aos="fade-right">
+          <!--<img src="images/traveler.jpg" alt="Image" class="img-fluid">-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+

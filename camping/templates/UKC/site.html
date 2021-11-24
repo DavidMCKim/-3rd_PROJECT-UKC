@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>UKC &mdash; U KNOW CAMPING</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css2/bootstrap.min.css' %}" rel="stylesheet" />
+    <!-- Style -->
+    <link href="{% static 'css2/style.css' %}" rel="stylesheet" />
+    <!--css_UKC-->
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Work+Sans:400,700,900&display=swap'>
+    <link rel="stylesheet" href="{%static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{%static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{%static 'css/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{%static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{%static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{%static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{%static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{%static 'css/style.css' %}">
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'src/js/scripts.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'src/assets/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'src/assets/demo/chart-bar-demo.js' %}"></script>
+    <script src="{% static 'src/assets/demo/chart-pie-demo.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/aj.js' %}"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7941f6a5b902c2b03be4d30014eec317&libraries=clusterer"></script>
+</head>
+<body class="sb-nav-fixed">
+    <header class="site-navbar site-navbar-target" role="banner">
+        <div class="container">
+          <div class="row align-items-center position-relative">
+            <div class="col-3 ">
+              <div class="site-logo">
+                <a href="home" class="font-weight-bold">
+                  <img src="{%static 'images/camping_logo.jpg' %}" alt="Image" class="img-fluid">
+                </a>
+              </div>
+            </div>
+            <div class="col-9  text-right">
+              <span class="d-inline-block d-lg-none"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span class="icon-menu h3 text-white"></span></a></span>
+              <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
+                <ul class="site-menu main-menu js-clone-nav ml-auto ">
+                  <li  style="font-family : kotra;"><a href="{% url 'home:home' %}" class="nav-link">Home</a></li>
+                  <li class="active"  style="font-family : kotra;"><a href="{% url 'home:site' %}" class="nav-link">Site</a></li>
+                  <li  style="font-family : kotra;"><a href="{% url 'home:review' %}" class="nav-link">Review</a></li>
+                  {% if user.is_authenticated %}
+                  <li  style="font-family : kotra;"><a href="{% url 'home:logout' %}" class="nav-link"> {{user.username}} (로그아웃) </a></li>
+                  {% else %}
+                  <li  style="font-family : kotra;"><a href="{% url 'home:login' %}" class="nav-link"> LogIn </a></li>
+                  {% endif %}
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <style>
+        .container {
+        border-bottom: 2px solid #000000;
+        padding-bottom:15px;
+        }
+
+        </style>
+    </header>
+    <div style="width:78%; height:90%; margin:0 auto; margin-right">
+    <p style="margin-top:-12px;">
+    <em class="link">
+      <!-- <a href="{% static 'YH.json' %}" target="_blank" style="font-family:ugroB; font-size:40px; text-align:center;">
+      <img src="{%static 'images/map.png' %}" alt="Image" class="img-fluid" style="height:40px; width:40px; margin:0 auto;">&nbsp; 지도로 보는 캠핑장 현황</a>-->
+            <p style="font-family:ugroM; font-size:40px; text-align:center;"><img src="{%static 'images/map.png' %}" alt="Image" class="img-fluid" style="height:40px; width:40px; margin:0 auto;">&nbsp 대한민국 구석구석</p>
+    </em>
+    </p>
+    <div id="map" style="margin:0 auto; width:80%;height:600px;"></div>
+    <script>
+
+        var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
+            center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
+            level : 13 // 지도의 확대 레벨
+        });
+
+        // 마커 클러스터러를 생성합니다
+        var clusterer = new kakao.maps.MarkerClusterer({
+            map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+            averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+            minLevel: 3 // 클러스터 할 최소 지도 레벨
+        });
+
+        // 데이터를 가져오기 위해 jQuery를 사용합니다
+        // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+        $.get("{% static 'position3.json' %}", function(data) {
+            // 데이터에서 좌표 값을 가지고 마커를 표시합니다
+            // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+            var markers = $(data.positions).map(function (i, position) {
+                var maks = new kakao.maps.Marker({
+                    map: map,
+                    position: new kakao.maps.LatLng(position.lat, position.lng)
+            });
+
+            // 마커에 표시할 인포윈도우를 생성합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: position.homepage // 인포윈도우에 표시할 내용
+
+            });
+
+    <!--        kakao.maps.event.addListener(maks, 'mouseover', makeOverListener(map, maks, infowindow));-->
+    <!--        kakao.maps.event.addListener(maks, 'mouseout', makeOutListener(infowindow));-->
+            kakao.maps.event.addListener(maks, 'mouseover', makeOverListener(map, maks, infowindow));
+            kakao.maps.event.addListener(maks, 'click', makeOutListener(infowindow));
+            return maks;
+
+            });
+
+
+            // 클러스터러에 마커들을 추가합니다
+            clusterer.addMarkers(markers);
+        });
+
+
+        function makeOverListener(map, marker, infowindow) {
+    <!--        infowindow.close();-->
+            return function() {
+                infowindow.open(map, marker);
+            };
+        }
+
+        // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+        function makeOutListener(infowindow) {
+            return function() {
+                infowindow.close();
+            };
+        }
+
+
+
+    </script>
+    </div>
+</body>
+</html>

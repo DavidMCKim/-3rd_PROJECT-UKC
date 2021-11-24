@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+{% load my_tag %}
+<head>
+  <title>UKC &mdash; U KNOW CAMPING</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Work+Sans:400,700,900&display=swap'>
+  <link rel="stylesheet" href="{%static 'fonts/icomoon/style.css' %}">
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{%static 'css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{%static 'css/jquery.fancybox.min.css' %}">
+  <link rel="stylesheet" href="{%static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{%static 'css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{%static 'fonts/flaticon/font/flaticon.css' %}">
+  <link rel="stylesheet" href="{%static 'css/aos.css' %}">
+  <link rel="stylesheet" href="{%static 'css/style.css' %}">
+
+  <script src="{%static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{%static 'js/jquery-migrate-3.0.0.js' %}"></script>
+  <script src="{%static 'js/popper.min.js' %}"></script>
+  <script src="{%static 'js/bootstrap.min.js' %}"></script>
+  <script src="{%static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{%static 'js/jquery.sticky.js' %}"></script>
+  <script src="{%static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{%static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{%static 'js/jquery.fancybox.min.js' %}"></script>
+  <script src="{%static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{%static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{%static 'js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{%static 'js/isotope.pkgd.min.js' %}"></script>
+  <script src="{%static 'js/aos.js' %}"></script>
+  <script src="{%static 'js/main.js' %}"></script>
+  <script src="{%static 'js/sojin.js' %}"></script>
+    <!-- Optional Javascript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <style>
+   .menu {
+        display: flex;
+        border: 1px solid yellow;
+    }
+
+    .menu-link {
+        margin: .1em;
+        padding: .3em;
+        color: #fff;
+        text-decoration: none;
+        background: dodgerblue;
+        list-style: none;
+    }
+
+    .menu-active {
+        background: orange;
+    }
+
+    .menu {
+        background-color: yellowgreen;
+    }
+
+   .max-small {
+      width:400px;
+      height:250px;
+      margin-top:100px;
+      margin-left:150px;
+      }
+
+   .result_info h2{
+    margin-top:15%;
+    }
+
+   .result_info {
+    padding-bottom:40px;
+    }
+
+    li { list-style:none; }
+
+    .container {
+    border-bottom: 2px solid #000000;
+    padding-bottom:15px;
+    }
+
+
+    .camp-list {
+    width: 33%;
+    display: inline-block;
+    text-align:center;
+    }
+
+    .camp_result{
+    margin-top:60px;
+    width:330%;
+    word-wrap: break-word;
+    }
+    .result_info{
+    margin-top:45px;}
+
+    .row {
+    margin-top:10px;
+    }
+
+
+    .site-section {
+    margin-top:-50px;}
+
+
+  </style>
+
+
+<body>
+    <div class="site-wrap" id="home-section">
+
+      <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div>
+    </div>
+
+
+    <header class="site-navbar site-navbar-target" role="banner">
+         <div class="container">
+          <div class="row align-items-center position-relative">
+            <div class="col-3 ">
+              <div class="site-logo">
+                <a href="home" class="font-weight-bold">
+                  <img src="{%static 'images/camping_logo.jpg' %}" alt="Image" class="img-fluid">
+                </a>
+              </div>
+            </div>
+            <div class="col-9  text-right">
+              <span class="d-inline-block d-lg-none"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span class="icon-menu h3 text-white"></span></a></span>
+              <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
+                <ul class="site-menu main-menu js-clone-nav ml-auto ">
+                  <li class="active"  style="font-family : kotra;"  ><a href="{% url 'home:home' %}" class="nav-link">Home</a></li>
+                  <li  style="font-family : kotra;"><a href="{% url 'home:site' %}" class="nav-link">Site</a></li>
+                  <li  style="font-family : kotra;"><a href="{% url 'home:review' %}" class="nav-link">Review</a></li>
+                  {% if user.is_authenticated %}
+                  <li  style="font-family : kotra;"><a href="{% url 'home:logout' %}" class="nav-link"> {{user.username}} (로그아웃) </a></li>
+                  {% else %}
+                  <li  style="font-family : kotra;"><a href="{% url 'home:login' %}" class="nav-link"> LogIn </a></li>
+                  {% endif %}
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </header>
+        <div class="row justify-content-center text-center">
+          <div class="col-md-7">
+            <div class="heading-39101 mb-5">
+              <span class="backdrop text-center" style="font-family : kotra; font-size:30px;">U KNOW</span>
+              <span class="subtitle-39191" style="font-family : kotra; font-size:30px;">CAMPING</span>
+              <h1 style="font-family : kotra;">Your Journey Starts Here !</h1>
+            </div>
+          </div>
+        </div>
+    <div class="site-section">
+      <div class="container">
+         <div class="row" >
+         {% for i in a %}
+         <article class="camp-list column1">
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="camp_result">
+                 <img src="{% static i.image %}" alt="Image" class="img-fluid" style="width:350px; height:250px;">
+                   <div class="result_info" style="font-family : ugroB;" >
+                      <h3 style="font-family : ugroB;"><a href="{{i.url}}" style="color:black;">{{i.name}}</a></h3>
+                     <p class="result_addr"><img src="{%static 'images/address.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.address}}</p>
+                     <p class="result_phone"><img src="{%static 'images/phone.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.phone}}</p>
+                     <p class="result_info"><img src="{%static 'images/info.png' %}" alt="Image" class="img-fluid" style="height:25px; width:25px;">&nbsp;{{i.info}}</p>
+                   </div>
+              </div>
+            </div>
+         </article>
+        {% if forloop.counter|modulo:3 == 0 %}
+        </div>
+        <div class="row">
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+        {% if a.has_previous %}
+            <li class="page-item">
+            <a class="page-link" href="/find_tag?{{value_list}}page={{ a.previous_page_number }}">Previous</a>
+          </li>
+        {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+        {% endif %}
+
+        {% if a.number|add:'-4' > 1 %}
+            <li class="page-item"><a class="page-link" href="/find_tag?{{value_list}}page={{ a.number|add:'-5' }}">&hellip;</a></li>
+        {% endif %}
+
+        {% for i in a.paginator.page_range %}
+            {% if a.number == i %}
+                <li class="page-item active" aria-current="page">
+              <span class="page-link">
+                {{ i }}
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+            {% elif i > a.number|add:'-5' and i < a.number|add:'5' %}
+                 <li class="page-item"><a class="page-link" href="/find_tag?{{value_list}}page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if a.paginator.num_pages > a.number|add:'4' %}
+           <li class="page-item"><a class="page-link" href="/find_tag?{{value_list}}page={{ a.number|add:'5' }}">&hellip;</a></li>
+        {% endif %}
+
+        {% if a.has_next %}
+            <li class="page-item">
+            <a class="page-link" href="/find_tag?{{value_list}}page={{ a.next_page_number }}">Next</a>
+          </li>
+        {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <!--end of Pagination-->
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>UKC_U KNOW CAMPING?</title>
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link href="{% static 'css2/bootstrap.min.css' %}" rel="stylesheet" />
+        <!-- Style -->
+<!--        <link href="{% static 'css2/style.css' %}" rel="stylesheet" />-->
+        <link href="{% static 'css/main_style.css' %}" rel="stylesheet" />
+        <!--css_UKC-->
+
+        <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Work+Sans:400,700,900&display=swap'>
+        <link rel="stylesheet" href="{%static 'UKC/fonts_UKC/icomoon/style.css' %}">
+
+        <link rel="stylesheet" href="{%static 'UKC/css_UKC/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{%static 'UKC/css_UKC/bootstrap-datepicker.css' %}">
+        <link rel="stylesheet" href="{%static 'UKC/css_UKC/jquery.fancybox.min.css' %}">
+        <link rel="stylesheet" href="{%static 'UKC/css_UKC/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{%static 'UKC/css_UKC/owl.theme.default.min.css' %}">
+        <link rel="stylesheet" href="{%static 'UKC/fonts_UKC/flaticon/font/flaticon.css' %}">
+        <link rel="stylesheet" href="{%static 'UKC/css_UKC/aos.css' %}">
+        <link rel="stylesheet" href="{%static 'UKC/css_UKC/style.css' %}">
+
+
+    </head>
+    <body class="sb-nav-fixed">
+        <header class="site-navbar site-navbar-target" role="banner">
+
+            <div class="container">
+              <div class="row align-items-center position-relative">
+
+                <div class="col-3 ">
+                  <div class="site-logo">
+                    <a href="home" class="font-weight-bold">
+                      <img src="{%static 'images/camping_logo.png' %}" alt="Image" class="img-fluid">
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-9  text-right">
+                  <span class="d-inline-block d-lg-none"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span class="icon-menu h3 text-white"></span></a></span>
+
+
+
+                  <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
+                    <ul class="site-menu main-menu js-clone-nav ml-auto ">
+                      <li class="active"  style="font-family : kotra;"><a href="{% url 'home:home' %}" class="nav-link">Home</a></li>
+                      <li  style="font-family : kotra;"><a href="{% url 'home:site' %}" class="nav-link">Site</a></li>
+                      <li  style="font-family : kotra;"><a href="{% url 'home:review' %}" class="nav-link">Review</a></li>
+                      {% if user.is_authenticated %}
+                      <li  style="font-family : kotra;"><a href="{% url 'home:logout' %}" class="nav-link"> {{user.username}} (로그아웃) </a></li>
+                      {% else %}
+                      <li  style="font-family : kotra;"><a href="{% url 'home:login' %}" class="nav-link"> LogIn </a></li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div>
+
+
+              </div>
+            </div>
+
+        </header>
+
+        <div class="ftco-blocks-cover-1">
+          <!--<img src="{%static 'images/camping_main.jpg' %}" style="background-image: url('images/camping_main.jpg')">-->
+          <div class="site-section-cover overlay" style="background-image: url({%static 'images/camping_main.jpg' %});">
+           <!-- <img src="{%static 'images/camping_main.jpg' %}">-->
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-5" data-aos="fade-right">
+                  <h1 class="mb-3 text-white">U KNOW CAMPING</h1>
+                  <p>리뷰야 나의 마음을 알려조</p>
+                  <p class="d-flex align-items-center">
+                    <a href="https://vimeo.com/191947042" data-fancybox class="play-btn-39282 mr-3"><span class="icon-play"></span></a>
+                    <span class="small">Watch the video</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if user.is_authenticated %}
+        <div>{{user.username}}님이 최근 다녀온 캠핑장과 유사한 캠핑장 추천~</div>
+        {% for i in x%}
+        <div>{{i}}</div>
+        {% endfor %}
+        {% else %}
+        <form method="POST" name="btn_value" action="{% url 'home:select' %}">
+        {% csrf_token %}
+            <table id="button_table" class="table table-hover" style="padding:10px 50px 10px 50px; font-size:18px;" >
+              <tr>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="가을" id="fall">#가을
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="가족" id="family">#가족
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="감상" id="enjoy">#감상
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="감성" id="emotion">#감성
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="겨울" id="winter">#겨울
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="경치" id="view">#경치
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="계곡" id="valley">#계곡
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="고요" id="calm">#고요
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="공기" id="air">#공기
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="공원" id="park"">#공원
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="관광" id="traveling" >#관광
+                </td>
+                </tr>
+                <tr>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="깨끗" id="clean">#깨끗
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="감성=나무" id="tree" >#나무
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="낚시" id="fishing">#낚시
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="낭만" id="romance">#낭만
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="단풍" id="maple">#단풍
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="물멍" id="water">#물멍
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="바다" id="sea">#바다
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="반딧불" id="firefly">#반딧불
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="반려동물" id="pet">#반려동물
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="벚꽃" id="sakura">#벚꽃
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="분위기" id="atmosphere">#분위기
+                </td>
+                </tr>
+                <tr>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="불멍" id="fire">#불멍
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="산책" id="walking">#산책
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="솔로캠핑" id="camping_alone">#솔로캠핑
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="시골" id="countryside">#시골
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="아이" id="kid">#아이
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="야경" id="night_view">#야경
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="여름" id="summer">#여름
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="우중" id="rain">#우중
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="운치" id="vibe" >#운치
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="일몰" id="sunset">#일몰
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="장박" id="long_stay">#장박
+                </td>
+                </tr>
+                <tr>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="저수지" id="reservoir">#저수지
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="접근성" id="accessibility">#접근성
+                </td>
+
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="친구" id="friend">#친구
+                </td>
+
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="친절" id="kindness">#친절
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="커플" id="couple">#커플
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="쾌적" id="fresh">#쾌적
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="편안" id="comfort">#편안
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="한강" id="han_river">#한강
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="호수" id="lake">#호수
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="휴식" id="break">#휴식
+                </td>
+                <td>
+                  <input type="checkbox" name="m_tab" class="tag_btn" value="힐링" id="healing">#힐링
+                </td>
+              </table>
+
+        <input type="text" value="" name="select">
+
+        <div class="tag_btn_wrap" style="text-align:center">
+            <input type="reset" value="초기화">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type='submit' value='검색하기' name='select' class="tag_btn02">
+        </div>
+
+        </form>
+        {% endif %}
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'src/js/scripts.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'src/assets/demo/chart-area-demo.js' %}"></script>
+        <script src="{% static 'src/assets/demo/chart-bar-demo.js' %}"></script>
+        <script src="{% static 'src/assets/demo/chart-pie-demo.js' %}"></script>
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    </body>
+</html>
